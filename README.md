@@ -189,13 +189,14 @@ flutter analyze
 
 ---
 
-## 📦 تحویل
-- سورس کامل همین مخزن (بدون `build/`)
-- APK امضاشده در `dist/Soundify-1.0.0-arm64-v8a.apk` (و نسخهٔ universal)
+## 📦 تحویل و لینک‌ها
+- سورس کامل: [github.com/FouadKhameneh/Mobile-Programming-Midterm](https://github.com/FouadKhameneh/Mobile-Programming-Midterm)
+- APK امضاشده: [dist/Soundify-1.0.0-arm64-v8a.apk](dist/Soundify-1.0.0-arm64-v8a.apk)
+- ویدئوی تست ۲–۳ دقیقه‌ای: [Screen_Recording_20261117_212504.mp4](Screen_Recording_20261117_212504.mp4)
 - همین `README.md`
 - فایل متنی لینک‌ها: `SUBMISSION.txt`
 - ۳۴ تست موفق (مدل‌ها، اعتبارسنجی، فرمت‌دهنده، گارد یکپارچگی استریم و اسموک‌تست ریشهٔ اپ): `flutter test`
-- برای ضبط ویدئو، APK را روی گوشی نصب کنید و با حساب نمایشی وارد شوید (در این محیط دستگاه فیزیکی در دسترس نبود).
+- برای اجرای تست دستی، APK را روی گوشی نصب کنید و با حساب نمایشی وارد شوید.
 
 ---
 
@@ -214,4 +215,3 @@ flutter analyze
 - پخش صدا به دسترسی اینترنت و در دسترس بودن آدرس استریم سرور وابسته است.
 - کاورها از CDN گوگل بارگذاری می‌شوند؛ در شبکه‌های محدود ممکن است با تصویر جایگزین نمایش داده شوند.
 - این پروژه برای Android هدف‌گذاری شده است (پلتفرم اصلی درس)؛ پیکربندی iOS انجام نشده است.
-"# Mobile-Programming-Midterm" 

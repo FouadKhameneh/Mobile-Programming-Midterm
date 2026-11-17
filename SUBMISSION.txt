@@ -1,33 +1,23 @@
 پروژه: Soundify — اپلیکیشن استریم موسیقی با Flutter
 =========================================================
 
-سورس‌کد کامل پروژه (پوشه و ریپازیتوری Git محلی):
-  C:\Users\Lion\Documents\deepseek-harness\default-workspace\soundify
-  (کامیت‌های مرحله‌ای و منظم؛ لینک GitHub/GitLab پس از push در همین فایل جایگزین شود.)
-
-فایل ZIP سورس (بدون پوشه build، شامل ۱۵۲ فایل):
-  C:\Users\Lion\Documents\deepseek-harness\default-workspace\soundify\dist\Soundify-source.zip
-  حجم: 1.04 MB
-  (پس از دریافت، فایل ZIP را باز کنید و طبق README اجرا کنید.)
+سورس‌کد کامل پروژه (ریپازیتوری GitHub):
+  https://github.com/FouadKhameneh/Mobile-Programming-Midterm
 
 فایل APK (نسخه ریلیز، arm64-v8a، امضاشده و قابل نصب):
-  C:\Users\Lion\Documents\deepseek-harness\default-workspace\soundify\dist\Soundify-1.0.0-arm64-v8a.apk
+  https://github.com/FouadKhameneh/Mobile-Programming-Midterm/raw/main/dist/Soundify-1.0.0-arm64-v8a.apk
   حجم: 21.06 MB
   SHA-256: 78ADA96C2E965E7353CBF04E254FAF2488E823FA58F580FCA16EEFD7A9DDB799
 
 فایل APK جامع (برای نصب روی ABIهای دیگر):
-  C:\Users\Lion\Documents\deepseek-harness\default-workspace\soundify\dist\Soundify-1.0.0-universal.apk
+  https://github.com/FouadKhameneh/Mobile-Programming-Midterm/raw/main/dist/Soundify-1.0.0-universal.apk
   SHA-256: 614A7B089CCAB66F48A401B59A0BA4EE99CFEFAB87AF332F15DE1245E60B6702
 
 فایل README.md (راهنمای اجرا، پیش‌نیازها و کتابخانه‌ها):
-  C:\Users\Lion\Documents\deepseek-harness\default-workspace\soundify\README.md
-
-لینک ریپازیتوری: 
-  <در اینجا لینک GitHub/GitLab قرار می‌گیرد — پروژه به‌صورت یک ریپازیتوری Git محلی با کامیت‌های منظم آماده است>
+  https://github.com/FouadKhameneh/Mobile-Programming-Midterm/blob/main/README.md
 
 ویدئوی تست ۲ تا ۳ دقیقه‌ای:
-  در این محیط دستگاه فیزیکی/شبیه‌ساز اندروید در دسترس نبود؛ ویدئو ضبط نشده است.
-  برای ضبط: APK را روی گوشی اندرویدی (arm64) نصب کنید و با حساب نمایشی زیر وارد شوید.
+  https://github.com/FouadKhameneh/Mobile-Programming-Midterm/blob/main/Screen_Recording_20261117_212504.mp4
 
 حساب نمایشی (برای تست سریع و ضبط ویدئو):
   ایمیل: soundifyqa74615@euploading.com
