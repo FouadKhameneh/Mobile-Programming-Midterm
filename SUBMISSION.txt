@@ -3,7 +3,7 @@
 
 سورس‌کد کامل پروژه (پوشه و ریپازیتوری Git محلی):
   C:\Users\Lion\Documents\deepseek-harness\default-workspace\soundify
-  (۹ کامیت مرحله‌ای؛ لینک GitHub/GitLab پس از push در همین فایل جایگزین شود.)
+  (کامیت‌های مرحله‌ای و منظم؛ لینک GitHub/GitLab پس از push در همین فایل جایگزین شود.)
 
 فایل ZIP سورس (بدون پوشه build، شامل ۱۵۲ فایل):
   C:\Users\Lion\Documents\deepseek-harness\default-workspace\soundify\dist\Soundify-source.zip
