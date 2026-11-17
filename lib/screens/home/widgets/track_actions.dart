@@ -26,12 +26,9 @@ Future<void> playQueueWithFeedback(
 }) async {
   final player = context.read<PlayerProvider>();
   await player.playQueue(queue, initialIndex: initialIndex);
+  // Playback errors (including the stream-integrity guard) are presented once
+  // by MainShell's PlayerProvider listener, so they are not duplicated here.
   if (!context.mounted) return;
-  final error = player.error;
-  if (error != null) {
-    showAppSnack(context, error, error: true);
-    player.clearError();
-  }
 }
 
 /// Toggles a favorite. [LibraryProvider] applies the change optimistically and

@@ -6,6 +6,7 @@ import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 
 import '../core/config/app_config.dart';
+import '../core/utils/stream_integrity.dart';
 import '../models/track.dart';
 
 /// The single source of truth for audio playback in Soundify.
@@ -37,6 +38,7 @@ class PlayerProvider extends ChangeNotifier {
   Duration _position = Duration.zero;
   Duration _duration = Duration.zero;
   String? _error;
+  bool _contentMismatch = false;
   bool _disposed = false;
 
   /// Incremented for every new playback request so that a slow/failed previous
@@ -101,6 +103,11 @@ class PlayerProvider extends ChangeNotifier {
   /// Convenience for UI: whether an error is currently surfaced.
   bool get hasError => _error != null;
 
+  /// True when the current stream's real duration proves that the server sent
+  /// an audio file belonging to a different track. Playback is halted in this
+  /// state so another artist's song is never presented as the selected track.
+  bool get contentMismatch => _contentMismatch;
+
   // ---------------------------------------------------------------------------
   // Playback commands
   // ---------------------------------------------------------------------------
@@ -141,6 +148,7 @@ class PlayerProvider extends ChangeNotifier {
     _duration = playable[index].duration;
     _loading = true;
     _error = null;
+    _contentMismatch = false;
     _safeNotify();
 
     try {
@@ -156,9 +164,11 @@ class PlayerProvider extends ChangeNotifier {
       if (_disposed || token != _requestToken) return;
       if (reportedDuration != null && reportedDuration > Duration.zero) {
         _duration = reportedDuration;
+        _checkStreamIntegrity();
       }
       _loading = false;
       _safeNotify();
+      if (_contentMismatch) return;
       await _player.play();
     } on PlayerInterruptedException {
       // A newer request replaced this one; the newer call owns the state.
@@ -189,6 +199,11 @@ class PlayerProvider extends ChangeNotifier {
     final sameQueue = listEquals(_queue, list);
     final sameTrack = currentTrack?.id == track.id;
     if (sameQueue && sameTrack && index == _currentIndex) {
+      if (_contentMismatch) {
+        _error = StreamIntegrity.mismatchMessage;
+        _safeNotify();
+        return;
+      }
       _error = null;
       if (!_player.playing) {
         if (_player.processingState == ProcessingState.completed) {
@@ -206,6 +221,13 @@ class PlayerProvider extends ChangeNotifier {
   /// Toggles between play and pause.
   Future<void> togglePlayPause() async {
     if (_disposed || currentTrack == null) return;
+    // Never resume a track that the server replaced with a different file.
+    if (_contentMismatch) {
+      _error = StreamIntegrity.mismatchMessage;
+      _playing = false;
+      _safeNotify();
+      return;
+    }
     // After a failed load, the play button acts as "retry".
     if (_error != null && _queue.isNotEmpty) {
       await playQueue(_queue, initialIndex: _currentIndex);
@@ -343,7 +365,9 @@ class PlayerProvider extends ChangeNotifier {
 
   /// Clears a surfaced error (used by the UI after showing it once).
   void clearError() {
-    if (_error == null) return;
+    // A data mismatch is not a transient failure: keep it visible until the
+    // listener chooses another track. It is cleared by the next playQueue.
+    if (_contentMismatch || _error == null) return;
     _error = null;
     _safeNotify();
   }
@@ -418,7 +442,30 @@ class PlayerProvider extends ChangeNotifier {
     final next = duration ?? currentTrack?.duration ?? Duration.zero;
     if (next == _duration) return;
     _duration = next;
+    // During an automatic advance the duration of the newly-loaded stream can
+    // arrive before just_audio emits the new current index. Ignore that event
+    // to avoid comparing the next file's duration with the previous track's
+    // metadata; the index handler re-runs the check once it knows the new track.
+    final streamIndex = _player.currentIndex;
+    if (streamIndex == null || streamIndex == _currentIndex) {
+      _checkStreamIntegrity();
+    }
     _safeNotify();
+  }
+
+  void _checkStreamIntegrity() {
+    if (_disposed || _contentMismatch) return;
+    final track = currentTrack;
+    if (track == null) return;
+    final expected = track.duration;
+    final actual = _player.duration ?? _duration;
+    if (actual <= Duration.zero || expected <= Duration.zero) return;
+    if (!StreamIntegrity.isMismatch(expected: expected, actual: actual)) return;
+    _contentMismatch = true;
+    _playing = false;
+    _loading = false;
+    _error = StreamIntegrity.mismatchMessage;
+    unawaited(_player.pause());
   }
 
   void _handleCurrentIndex(int? index) {
@@ -428,6 +475,10 @@ class PlayerProvider extends ChangeNotifier {
     _position = Duration.zero;
     _duration = currentTrack?.duration ?? Duration.zero;
     _error = null;
+    _contentMismatch = false;
+    // Do not compare here: just_audio may still expose the previous stream's
+    // duration until the new track is prepared. The duration stream event will
+    // run the check once the real duration of this track is available.
     _safeNotify();
   }
 

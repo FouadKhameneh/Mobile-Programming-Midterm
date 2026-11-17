@@ -44,11 +44,23 @@ class CatalogProvider extends ChangeNotifier {
     _error = null;
     notifyListeners();
     try {
-      final featuredFuture = _api.featuredTracks();
-      final tracksFuture = _api.tracks(pageSize: 30);
+      final featuredFuture = _api.featuredTracks().catchError(
+        (Object _) => const <Track>[],
+      );
+      final firstPage = await _api.tracks(pageSize: 50, page: 1);
+      final all = <Track>[...firstPage.items];
+      final totalPages = (firstPage.count / 50).ceil().clamp(1, 20).toInt();
+      if (totalPages > 1) {
+        final pages = await Future.wait<List<Track>>(<Future<List<Track>>>[
+          for (var page = 2; page <= totalPages; page++) _safePage(page),
+        ]);
+        for (final items in pages) {
+          all.addAll(items);
+        }
+      }
+      final seen = <String>{};
       _featured = await featuredFuture;
-      final page = await tracksFuture;
-      _tracks = page.items;
+      _tracks = all.where((track) => seen.add(track.id)).toList(growable: false);
       _loaded = true;
     } on ApiException catch (e) {
       _error = e.message;
@@ -61,4 +73,16 @@ class CatalogProvider extends ChangeNotifier {
   }
 
   Future<void> refresh() => load(force: true);
+
+  /// Fetches a subsequent catalog page without turning a single flaky page into
+  /// a total home-screen failure. The first page is the primary source; later
+  /// pages only enrich the catalog.
+  Future<List<Track>> _safePage(int page) async {
+    try {
+      final result = await _api.tracks(pageSize: 50, page: page);
+      return result.items;
+    } catch (_) {
+      return const <Track>[];
+    }
+  }
 }

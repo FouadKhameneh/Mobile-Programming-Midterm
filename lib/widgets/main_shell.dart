@@ -1,9 +1,12 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:provider/provider.dart';
 
 import '../screens/home/home_screen.dart';
 import '../screens/library/library_screen.dart';
 import '../screens/profile/profile_screen.dart';
 import '../screens/search/search_screen.dart';
+import '../state/player_provider.dart';
+import 'app_widgets.dart';
 import 'mini_player.dart';
 
 class MainShell extends StatefulWidget {
@@ -15,6 +18,8 @@ class MainShell extends StatefulWidget {
 
 class _MainShellState extends State<MainShell> {
   int _index = 0;
+  PlayerProvider? _player;
+  String? _lastError;
 
   static const List<Widget> _pages = <Widget>[
     HomeScreen(),
@@ -22,6 +27,33 @@ class _MainShellState extends State<MainShell> {
     LibraryScreen(),
     ProfileScreen(),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _player = context.read<PlayerProvider>();
+    _player!.addListener(_onPlayerChanged);
+  }
+
+  @override
+  void dispose() {
+    _player?.removeListener(_onPlayerChanged);
+    super.dispose();
+  }
+
+  void _onPlayerChanged() {
+    final message = _player?.error;
+    if (message == null) {
+      _lastError = null;
+      return;
+    }
+    if (message == _lastError || !mounted) return;
+    _lastError = message;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      showAppSnack(context, message, error: true);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
