@@ -8,7 +8,7 @@
 فایل ZIP سورس (بدون پوشه build، شامل ۱۵۲ فایل):
   C:\Users\Lion\Documents\deepseek-harness\default-workspace\soundify\dist\Soundify-source.zip
   حجم: 1.04 MB
-  SHA-256: F859E647BDB2B58836BD53DC09CB5ED8A014B63F6BC4DE3CD05C73CA60D97A41
+  (پس از دریافت، فایل ZIP را باز کنید و طبق README اجرا کنید.)
 
 فایل APK (نسخه ریلیز، arm64-v8a، امضاشده و قابل نصب):
   C:\Users\Lion\Documents\deepseek-harness\default-workspace\soundify\dist\Soundify-1.0.0-arm64-v8a.apk
