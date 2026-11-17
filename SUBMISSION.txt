@@ -1,9 +1,14 @@
 پروژه: Soundify — اپلیکیشن استریم موسیقی با Flutter
 =========================================================
 
-سورس‌کد کامل پروژه:
+سورس‌کد کامل پروژه (پوشه و ریپازیتوری Git محلی):
   C:\Users\Lion\Documents\deepseek-harness\default-workspace\soundify
-  (ریپازیتوری Git محلی با کامیت‌های مرحله‌ای آماده است؛ لینک GitHub/GitLab پس از push در همین فایل جایگزین شود.)
+  (۹ کامیت مرحله‌ای؛ لینک GitHub/GitLab پس از push در همین فایل جایگزین شود.)
+
+فایل ZIP سورس (بدون پوشه build، شامل ۱۵۲ فایل):
+  C:\Users\Lion\Documents\deepseek-harness\default-workspace\soundify\dist\Soundify-source.zip
+  حجم: 1.04 MB
+  SHA-256: F859E647BDB2B58836BD53DC09CB5ED8A014B63F6BC4DE3CD05C73CA60D97A41
 
 فایل APK (نسخه ریلیز، arm64-v8a، امضاشده و قابل نصب):
   C:\Users\Lion\Documents\deepseek-harness\default-workspace\soundify\dist\Soundify-1.0.0-arm64-v8a.apk
