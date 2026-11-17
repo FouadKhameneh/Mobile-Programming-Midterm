@@ -33,7 +33,7 @@
 
 خلاصه تست‌ها:
   - flutter analyze: بدون خطا/هشدار (فقط چند info سبک)
-  - flutter test: ۲۶ تست موفق
+  - flutter test: ۲۹ تست موفق
   - APK: build موفق، امضا معتبر، targetSdk 36، minSdk 24، native-code arm64-v8a
   - تست یکپارچه API: ثبت‌نام، OTP verify، ورود، دریافت پروفایل، کاتالوگ/جستجو، استریم Range 206، CRUD پلی‌لیست، لایک/آنلایک و refresh token با موفقیت بررسی شد.
 
