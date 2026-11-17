@@ -1,0 +1,40 @@
+پروژه: Soundify — اپلیکیشن استریم موسیقی با Flutter
+=========================================================
+
+سورس‌کد کامل پروژه:
+  C:\Users\Lion\Documents\deepseek-harness\default-workspace\soundify
+  (ریپازیتوری Git محلی با کامیت‌های مرحله‌ای آماده است؛ لینک GitHub/GitLab پس از push در همین فایل جایگزین شود.)
+
+فایل APK (نسخه ریلیز، arm64-v8a، امضاشده و قابل نصب):
+  C:\Users\Lion\Documents\deepseek-harness\default-workspace\soundify\dist\Soundify-1.0.0-arm64-v8a.apk
+  حجم: 21.06 MB
+  SHA-256: 860462B531220217F668A781A6C221F3B6B60E536E901C7711A1303407533C19
+
+فایل APK جامع (برای نصب روی ABIهای دیگر):
+  C:\Users\Lion\Documents\deepseek-harness\default-workspace\soundify\dist\Soundify-1.0.0-universal.apk
+  SHA-256: 05EBA5735C0B14A6AB56DC2B38B260BB265BBAC19AA576B62C4477B8F8C47E61
+
+فایل README.md (راهنمای اجرا، پیش‌نیازها و کتابخانه‌ها):
+  C:\Users\Lion\Documents\deepseek-harness\default-workspace\soundify\README.md
+
+لینک ریپازیتوری: 
+  <در اینجا لینک GitHub/GitLab قرار می‌گیرد — پروژه به‌صورت یک ریپازیتوری Git محلی با کامیت‌های منظم آماده است>
+
+ویدئوی تست ۲ تا ۳ دقیقه‌ای:
+  در این محیط دستگاه فیزیکی/شبیه‌ساز اندروید در دسترس نبود؛ ویدئو ضبط نشده است.
+  برای ضبط: APK را روی گوشی اندرویدی (arm64) نصب کنید و با حساب نمایشی زیر وارد شوید.
+
+حساب نمایشی (برای تست سریع و ضبط ویدئو):
+  ایمیل: soundifyqa74615@euploading.com
+  رمز عبور: TestPass123!
+
+آدرس API: https://soundify.easyfound.ir/api/v1
+مستندات: https://soundify.easyfound.ir/docs
+
+خلاصه تست‌ها:
+  - flutter analyze: بدون خطا/هشدار (فقط چند info سبک)
+  - flutter test: ۲۶ تست موفق
+  - APK: build موفق، امضا معتبر، targetSdk 36، minSdk 24، native-code arm64-v8a
+  - تست یکپارچه API: ثبت‌نام، OTP verify، ورود، دریافت پروفایل، کاتالوگ/جستجو، استریم Range 206، CRUD پلی‌لیست، لایک/آنلایک و refresh token با موفقیت بررسی شد.
+
+تاریخ تحویل: 2026-11-17
